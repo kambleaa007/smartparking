@@ -1,0 +1,21 @@
+==========Customer Registration========
+URL:http://smartparking.cloudapp.net:8080/smartparking/api/v1/mobile/customer/registartion
+REQUEST:
+{
+  "country": "2",
+  "countryCode": "91",
+  "email": "user001@gmail.com",
+  "mobileNumber": "0123456789",
+  "password": "india123",
+  "updatedBy": "1",
+  "username": "user001"
+}
+
+RESPONSE:
+{
+  "appHeader": {
+    "statusCode": "200",
+    "statusMessage": "Customer Profile registered successfully."
+  },
+  "customerId": "11"
+}

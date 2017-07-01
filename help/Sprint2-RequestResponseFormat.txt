@@ -1,0 +1,341 @@
+1. getApplicationNonce:
+https://52.27.230.185:8443/BuyButtonApplicationPortalSprint2/api/v1/getApplicationNonce
+
+REQUEST:
+For Anroid->
+{
+   "appId":"te00000002",
+   "merchantId":"Te00000001",
+   "appSignature":"sign2",
+   "appPackageName":"pack2"
+}
+
+For IOS->
+{
+   "appId":"te00000002",
+   "merchantId":"Te00000001",
+   "appSignature":"sign1",
+   "appPackageName":"pack1"
+}
+
+RESPONSE:
+PASS-
+{
+  "appHeader": {
+    "statusCode": "200",
+    "statusMessage": "Operation was successful"
+  },
+  "appResult": {
+    "serviceResponse": {
+      "appNonce": "UBYDMM0RJ2QD5DAOWQX7",
+      "message": null
+    }
+  }
+}
+
+FAIL-
+1.
+{
+  "appHeader": {
+    "statusCode": "1",
+    "statusMessage": "Error performing operation"
+  },
+  "appResult": {
+    "serviceResponse": {
+      "appNonce": null,
+      "message": "Wrong package name"
+    }
+  }
+}
+
+2. 
+{
+  "appHeader": {
+    "statusCode": "1",
+    "statusMessage": "Error performing operation"
+  },
+  "appResult": {
+    "serviceResponse": {
+      "appNonce": null,
+      "message": "Application signature does not match provisioned signatures for the application"
+    }
+  }
+}
+
+
+2. getPaymentOptions:
+https://52.27.230.185:8443/BuyButtonApplicationPortalSprint2/api/v1/getPaymentOptions
+
+Scenario-1: (For Guest user)
+REQUEST:
+{
+   "mdnNumber":"23232323",
+   "appNonce":"GSER1LTQQOTQKFUR0ZJQ"
+}
+
+RESPONSE:
+PASS-
+{
+  "appHeader": {
+    "statusCode": "200",
+    "statusMessage": "Operation was successful"
+  },
+  "appResult": {
+    "serviceResponse": {
+      "defaultPaymentMethodId": 0,
+      "paymentOptions": [
+        
+      ],
+      "btProfileExist": false
+    }
+  }
+}
+
+Scenario-2: (For existing User)
+REQUEST:
+{
+   "mdnNumber":"118",
+   "appNonce":"GSER1LTQQOTQKFUR0ZJQ"
+}
+
+RESPONSE:
+PASS-
+{
+  "appHeader": {
+    "statusCode": "200",
+    "statusMessage": "Operation was successful"
+  },
+  "appResult": {
+    "serviceResponse": {
+      "defaultPaymentMethodId": 59,
+      "paymentOptions": [
+        {
+          "cardType": "Visa",
+          "paymentMethodId": "44",
+          "zipCode": "22222",
+          "last4Digit": "1881"
+        },
+        {
+          "cardType": "Visa",
+          "paymentMethodId": "45",
+          "zipCode": "22222",
+          "last4Digit": "1881"
+        },
+        {
+          "cardType": "Visa",
+          "paymentMethodId": "46",
+          "zipCode": "22222",
+          "last4Digit": "1881"
+        },
+        {
+          "cardType": "Visa",
+          "paymentMethodId": "47",
+          "zipCode": "22222",
+          "last4Digit": "1881"
+        },
+        {
+          "cardType": "Visa",
+          "paymentMethodId": "48",
+          "zipCode": "22222",
+          "last4Digit": "1881"
+        }
+      ],
+      "btProfileExist": true
+    }
+  }
+}
+
+3. getBrainTreeToken:
+https://52.27.230.185:8443/BuyButtonApplicationPortalSprint2/api/v1/getBrainTreeToken
+
+REQUEST:
+{
+   "appNonce": "E64PX7FKDKPGGWI7O8WY",
+   "mdnNumber": "mdnnumber"
+}
+
+RESPONSE:
+PASS-
+{
+  "appHeader": {
+    "statusCode": "200",
+    "statusMessage": "Operation was successful"
+  },
+  "appResult": {
+    "serviceResponse": {
+      "btToken": "dfsdf",
+      "message": null
+	}
+  }
+}
+
+FAIL-
+{
+  "appHeader": {
+    "statusCode": "1",
+    "statusMessage": "Error performing operation"
+  },
+  "appResult": {
+    "btToken":null,
+    "message":"Invalid Application Nonce."
+  }
+}
+
+4. getTax:
+https://52.27.230.185:8443/BuyButtonApplicationPortalSprint2/api/v1/getTax
+
+REQUEST:
+{
+   "appNonce":"H8BM04UBIX7JPDWTP0OC",
+   "zipCode":"112121",
+   "itemAmount":"100"
+}
+
+RESPONSE:
+PASS-
+{
+  "appHeader": {
+    "statusCode": "200",
+    "statusMessage": "Operation was successful"
+  },
+  "appResult": {
+    "serviceResponse": {
+      "taxAmount": "7.00",
+      "message": null
+    }
+  }
+}
+
+FAIL-
+{
+  "appHeader": {
+    "statusCode": "1",
+    "statusMessage": "Error performing operation"
+  },
+  "appResult": {
+    "serviceResponse": {
+      "taxAmount": null,
+      "message": "Item amount is not valid."
+    }
+  }
+}
+
+5. processTransaction:
+https://52.27.230.185:8443/BuyButtonApplicationPortalSprint2/api/v1/processTransaction
+
+Scenario-1:(Guest Checkout)
+REQUEST:
+{
+   "mdnNumber":"1222",
+   "appNonce": "THCMBHMKPPTEP76HXGUE",
+   "paymentType": "Creditcard",
+   "itemAmount": "104",
+   "itemTax":"2",
+   "zipCode": "22222",
+   "nameOnCard":"guest-2",
+   "btNonce":"fake-valid-nonce"
+}
+
+RESPONSE:
+PASS-
+{
+  "appHeader": {
+    "statusCode": "1",
+    "statusMessage": "Error performing operation"
+  },
+  "appResult": {
+    "serviceResponse": {
+      "transactionStatus": "VALIDATION_FAILED",
+      "message": "Connection timed out: connect",
+      "transactionStatusCode": "9999"
+    }
+  }
+}
+
+Scenario-2:(New Customer with Add Card)
+REQUEST:
+{
+   "mdnNumber":"1223",
+   "appNonce": "W3044896HNM6T3YSR9UK",
+   "paymentType": "Creditcard",
+   "itemAmount": "104",
+   "itemTax":"2",
+   "zipCode": "22222",
+   "nameOnCard":"guest-2",
+   "btNonce":"fake-valid-nonce",
+   "pin":"111"
+}
+
+RESPONSE:
+PASS-
+{
+  "appHeader": {
+    "statusCode": "200",
+    "statusMessage": "Operation was successful"
+  },
+  "appResult": {
+    "serviceResponse": {
+      "transactionStatus": "SUBMITTED_FOR_SETTLEMENT",
+      "message": "The transaction is approved. ",
+      "transactionStatusCode": "1000"
+    }
+  }
+}
+
+Scenario-3:(Existing Customer with Add Card)
+REQUEST:
+{
+   "mdnNumber":"1223",
+   "appNonce": "W3044896HNM6T3YSR9UK",
+   "paymentType": "Creditcard",
+   "itemAmount": "104",
+   "itemTax":"2",
+   "zipCode": "22222",
+   "nameOnCard":"guest-2",
+   "btNonce":"fake-valid-nonce",
+   "pin":"111"
+}
+
+PASS-
+{
+  "appHeader": {
+    "statusCode": "200",
+    "statusMessage": "Operation was successful"
+  },
+  "appResult": {
+    "serviceResponse": {
+      "transactionStatus": "SUBMITTED_FOR_SETTLEMENT",
+      "message": "The transaction is approved. ",
+      "transactionStatusCode": "1000"
+    }
+  }
+}
+
+Scenario-4:(Existing Customer with vaulted card)
+REQUEST:
+{
+   "mdnNumber":"1223",
+   "appNonce": "1L4V9OT86W7F4P7NARWU",
+   "paymentType": "Creditcard",
+   "itemAmount": "104",
+   "itemTax":"2",
+   "zipCode": "22222",
+   "nameOnCard":"guest-2",
+   "pin":"111",
+   "paymentMethodId":"64"
+}
+
+PASS-
+{
+  "appHeader": {
+    "statusCode": "200",
+    "statusMessage": "Operation was successful"
+  },
+  "appResult": {
+    "serviceResponse": {
+      "transactionStatus": "SUBMITTED_FOR_SETTLEMENT",
+      "message": "The transaction is approved. ",
+      "transactionStatusCode": "1000"
+    }
+  }
+}

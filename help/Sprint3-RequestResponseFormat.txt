@@ -1,0 +1,120 @@
+1. https://localhost:8443/BuyButtonApplicationPortalSprint3/api/v1/nonce
+
+REQUEST:
+{
+  "applicationId": "te00000002",
+  "merchantId": "Te00000001",
+  "signature": "sign2",
+  "packageName": "pack2"
+}
+
+RESPONSE:
+{
+  "success": "true",
+  "applicationNonce": "1IZD7Y96VAB3JHHF7Y86"
+}
+
+4. Vaulting:
+https://localhost:8443/BuyButtonApplicationPortalSprint2/api/v1/cards
+REQUEST HEADER:
+applicationNonce: 1CIRRC3IX6NPKW90RO5V
+mdn: 2
+
+REQUEST BODY:
+{
+  "address": {
+    "zipcode": "221212"
+  },
+  "provider": {
+    "name": "braintree",
+    "nonce": "fake-valid-nonce"
+  },
+  "name": "Madhusmita"
+}
+
+INVALID RESPONSE:
+{
+  "success": "false",
+  "errors": {
+    "validationErrors": [
+      
+    ],
+    "otherErrors": [
+      {
+        "param": "93108",
+        "msg": "Unknown payment_method_nonce."
+      }
+    ]
+  }
+}
+
+VALID RESPONSE:
+{
+  "success": "true",
+  "errors": null,
+  "card": {
+    "id": "43",
+    "type": "American Express",
+    "zipcode": "221212",
+    "last4": "0005"
+  }
+}
+
+5. Transaction:
+https://52.27.230.185:8443/BuyButtonApplicationPortalSprint2/api/v1/transactions
+
+Scenario-1:(Guest Checkout)
+REQUEST:
+{
+  "paymentType": "creditcard",
+  "amount": "11",
+  "tax": "2",
+  "name": "guest-1",
+  "btNonce": "fake-valid-nonce",
+  "options": {
+    "storeCard": "false"
+  },
+  "address": {
+    "zipcode": "222"
+  }
+}
+
+RESPONSE:
+PASS-
+{
+  "success": "true",
+  "errors": null
+}
+
+FAIL-
+{
+  "success": "false",
+  "errors": {
+    "validationErrors": [
+      {
+        "param": "applicationId",
+        "msg": "applicationId is required"
+      }
+    ],
+    "otherErrors": [
+      {
+        "param": "applicationId",
+        "msg": "applicationId is required"
+      }
+    ]
+  }
+}
+
+EXISTING CUSTOMER:
+REQUEST:
+{
+  "paymentType": "Creditcard",
+  "amount": "104",
+  "tax": "2",
+  card: {
+    "id": "64"
+  }
+}
+
+RESPONSE:
+

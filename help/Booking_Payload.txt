@@ -1,0 +1,43 @@
+==========Block the Booking========
+URL:http://smartparking.cloudapp.net:8080/smartparking/booking/block
+REQUEST:
+{
+  "customerId": 1,
+  "fromTime": "2017-02-28 17:10:00",
+  "levelId": 1,
+  "slotTypeId": 1,
+  "timeZone": "IST",
+  "toTime": "2017-02-28 17:30:00",
+  "vehicleTypeId": 2
+}
+
+RESPONSE:
+{
+  "appHeader": {
+    "statusCode": "200",
+    "statusMessage": "Parking Blocked Successfully."
+  },
+  "customerId": 1,
+  "bookingId": 20
+}
+
+==========Payment the Booking========
+URL:http://smartparking.cloudapp.net:8080/smartparking/booking/payment
+REQUEST:
+{
+  "bookingId": 20,
+  "cost": 20,
+  "customerId": 1,
+  "extendedStatus": false,
+  "paymentStatus": true,
+  "transactionId": "string"
+}
+
+RESPONSE:
+{
+  "appHeader": {
+    "statusCode": "200",
+    "statusMessage": "Parking Payment Status Updated Successfully."
+  },
+  "customerId": 1
+}

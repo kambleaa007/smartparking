@@ -1,0 +1,84 @@
+1. https://52.27.230.185:8443/BuyButtonApplicationPortal/getApplicationNonce
+REQUEST:
+{
+   "appId":"te00000002",
+   "merchantId":"Te00000001"
+}
+
+RESPONSE:
+{
+	appHeader: {
+		statusCode: "200"
+		statusMessage: "Operation was successfull"
+	}
+	appResult: {
+		serviceRepsonse: {
+			appNonce: "E64PX7FKDKPGGWI7O8WY"
+		}
+	}
+}
+
+2. https://52.27.230.185:8443/BuyButtonApplicationPortal/getBrainTreeToken
+REQUEST:
+{
+   "appNonce": "E64PX7FKDKPGGWI7O8WY",
+   "mdnNum": "mdnnumber"
+}
+
+RESPONSE:
+	
+{
+	appHeader: {
+		statusCode: "200"
+		statusMessage: "Operation was successfull"
+	}
+	appResult: {
+		serviceRepsonse: {
+			btCustomerId: "TODO"
+			btToken: "eyJ2ZXJzaW9uIjoyLCJhdXRob3JpemF0aW9uRmluZ2VycHJpbnQiOiJhN2JiNDRjNWNkMmQzODkxNDhlNWQzZTIzYjZiN2RkYTg0YzA2NjhhZDg1ZTI2YzY5YTQ5YzRlNjY5MzJjZDFmfGNyZWF0ZWRfYXQ9MjAxNS0xMS0wNlQwOToxMjowOS40ODg4NTA0MDErMDAwMFx1MDAyNm1lcmNoYW50X2lkPTQzaDR5aGNucGJkN3I5c3pcdTAwMjZwdWJsaWNfa2V5PTkyZ2c3azhzeXRqeDdwMjUiLCJjb25maWdVcmwiOiJodHRwczovL2FwaS5zYW5kYm94LmJyYWludHJlZWdhdGV3YXkuY29tOjQ0My9tZXJjaGFudHMvNDNoNHloY25wYmQ3cjlzei9jbGllbnRfYXBpL3YxL2NvbmZpZ3VyYXRpb24iLCJjaGFsbGVuZ2VzIjpbXSwiZW52aXJvbm1lbnQiOiJzYW5kYm94IiwiY2xpZW50QXBpVXJsIjoiaHR0cHM6Ly9hcGkuc2FuZGJveC5icmFpbnRyZWVnYXRld2F5LmNvbTo0NDMvbWVyY2hhbnRzLzQzaDR5aGNucGJkN3I5c3ovY2xpZW50X2FwaSIsImFzc2V0c1VybCI6Imh0dHBzOi8vYXNzZXRzLmJyYWludHJlZWdhdGV3YXkuY29tIiwiYXV0aFVybCI6Imh0dHBzOi8vYXV0aC52ZW5tby5zYW5kYm94LmJyYWludHJlZWdhdGV3YXkuY29tIiwiYW5hbHl0aWNzIjp7InVybCI6Imh0dHBzOi8vY2xpZW50LWFuYWx5dGljcy5zYW5kYm94LmJyYWludHJlZWdhdGV3YXkuY29tIn0sInRocmVlRFNlY3VyZUVuYWJsZWQiOmZhbHNlLCJwYXlwYWxFbmFibGVkIjp0cnVlLCJwYXlwYWwiOnsiZGlzcGxheU5hbWUiOiJUZWNoTWFoaW5kcmEiLCJjbGllbnRJZCI6bnVsbCwicHJpdmFjeVVybCI6Imh0dHA6Ly9leGFtcGxlLmNvbS9wcCIsInVzZXJBZ3JlZW1lbnRVcmwiOiJodHRwOi8vZXhhbXBsZS5jb20vdG9zIiwiYmFzZVVybCI6Imh0dHBzOi8vYXNzZXRzLmJyYWludHJlZWdhdGV3YXkuY29tIiwiYXNzZXRzVXJsIjoiaHR0cHM6Ly9jaGVja291dC5wYXlwYWwuY29tIiwiZGlyZWN0QmFzZVVybCI6bnVsbCwiYWxsb3dIdHRwIjp0cnVlLCJlbnZpcm9ubWVudE5vTmV0d29yayI6dHJ1ZSwiZW52aXJvbm1lbnQiOiJvZmZsaW5lIiwidW52ZXR0ZWRNZXJjaGFudCI6ZmFsc2UsImJyYWludHJlZUNsaWVudElkIjoibWFzdGVyY2xpZW50MyIsImJpbGxpbmdBZ3JlZW1lbnRzRW5hYmxlZCI6ZmFsc2UsIm1lcmNoYW50QWNjb3VudElkIjoidGVjaG1haGluZHJhIiwiY3VycmVuY3lJc29Db2RlIjoiVVNEIn0sImNvaW5iYXNlRW5hYmxlZCI6ZmFsc2UsIm1lcmNoYW50SWQiOiI0M2g0eWhjbnBiZDdyOXN6IiwidmVubW8iOiJvZmYifQ=="
+		}
+	}
+}
+
+3. https://52.27.230.185:8443/BuyButtonApplicationPortal/processBrainTreeCCTransaction
+REQUEST:
+{
+   "appNonce": "E64PX7FKDKPGGWI7O8WY",
+   "btNonce": "2312312321jklj",
+   "paymentType": "Creditcard",
+   "itemAmount": "10",
+   "billingAdd1": "add1",
+   "billingAdd2": "add2",
+   "billingCity": "city",
+   "billingState": "state",
+   "billingZipCode": "231231"
+}
+
+RESPONSE:
+PASS:
+{
+	appHeader: {
+		statusCode: "200"
+		statusMessage: "Operation was successfull"
+	}
+	appResult: {
+		serviceRepsonse: {
+			appTransactionId: "55"
+			btTransactionStatus: "SUBMITTED_FOR_SETTLEMENT"
+		}
+	}
+}
+
+FAIL:
+{
+	appHeader: {
+		statusCode: "1"
+		statusMessage: "Error performing operation"
+	}
+	appResult: {
+		serviceRepsonse: {
+			appTransactionId: "1"
+			btTransactionStatus: "FAILED"
+		}
+	}
+}
